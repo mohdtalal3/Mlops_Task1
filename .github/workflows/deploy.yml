@@ -23,7 +23,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
       - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.MLOPS_TASK1_SECRET }}
         run: |
-          npm install -g vercel
-          vercel --token ${{ secrets.MLOPS_TASK1_SECRET }} --prod
+          vercel --token $VERCEL_TOKEN --yes --prod
